@@ -5,9 +5,12 @@ const AppError = require('./error/appError');
 const catchAsync = require('./error/catchAsync');
 
 exports.getRoboflowPrediction = catchAsync(async (req, res, next) => {
-  const image = fs.readFileSync(`${__dirname}/uploads/${req.params.imageName}`, {
-    encoding: 'base64',
-  });
+  const image = fs.readFileSync(
+    `${__dirname}/uploads/${req.params.imageName}`,
+    {
+      encoding: 'base64',
+    }
+  );
 
   const response = await axios({
     method: 'POST',
@@ -38,7 +41,7 @@ exports.uploadImageFile = (req, res) => {
       res.status(200).json({
         status: 'success',
         message: 'File Uploaded!',
-        imageName: tempPath.split('/').at(-1),
+        imageName: tempPath.split('/').pop(),
       });
     });
   } else {
