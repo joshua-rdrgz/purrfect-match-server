@@ -7,7 +7,7 @@
     "start": "NODE_ENV=development nodemon server.js",
     "start:prod": "NODE_ENV=production nodemon server.js",
     "debug": "ndb server.js",
-    "build": "webpack"
+    "build": "npm install && webpack"
   },
   "author": "Joshua Rodriguez",
   "license": "ISC",
