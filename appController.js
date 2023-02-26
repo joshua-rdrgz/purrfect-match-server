@@ -5,7 +5,6 @@ const AppError = require('./error/appError');
 const catchAsync = require('./error/catchAsync');
 
 exports.getRoboflowPrediction = catchAsync(async (req, res, next) => {
-  console.log('imageName:', req.params.imageName);
   const image = fs.readFileSync(`${__dirname}/uploads/${req.params.imageName}`, {
     encoding: 'base64',
   });
@@ -29,9 +28,8 @@ exports.getRoboflowPrediction = catchAsync(async (req, res, next) => {
 });
 
 exports.uploadImageFile = (req, res) => {
-  console.log('hello from uploadImageFile');
   const tempPath = req.file.path;
-  const targetPath = path.join(__dirname, req.file.path);
+  const targetPath = path.join(__dirname, 'uploads', req.file.filename);
 
   if (path.extname(req.file.originalname).toLowerCase() === '.jpg') {
     fs.rename(tempPath, targetPath, (err) => {
