@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
@@ -8,12 +9,17 @@ const appController = require('./appController');
 const AppError = require('./error/appError');
 const globalErrorHandler = require('./error/errorController');
 
+const uploadsDir = './uploads';
+
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir);
+}
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, './uploads');
   },
   filename: (req, file, cb) => {
-    console.log(file);
     cb(null, Date.now() + file.originalname);
   },
 });
